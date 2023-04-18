@@ -6,7 +6,8 @@ def open_json_file(file: str):
             data = json.load(json_file)
             return data
     except:
-        print(f"Ha ocurrido un error, no se ha podido abrir el archivo {file}")
+        print(f"An error has ocurred, can't open the file {file}")
+        exit()
 
 
 def finder(verb):
@@ -14,25 +15,76 @@ def finder(verb):
         if verb in v.values(): 
             return v        
             
+
+def find():
+    print('* ' * 27)
+    print('Press enter to leave or write the verb you want')
+
+    while True:
+        val_2_find = input('write the verb you want to find: ')
+
+        if val_2_find == '':
+            break
+
+        result = finder(val_2_find)
+
+        if result == None:
+            print(f'Verb {val_2_find} is not found')
+            continue
+
+        print('Base:            ' + result['Base'])
+        print('Past simple:     ' + result['Past-simple'])
+        print('Past participle: ' + result['Past-Participle'])
+
+def game():
+    while True:
+        print('* ' * 27)
+        print('Chose an option:')
+        print('1 10 verbs')
+        print('2 20 verbs')
+        print('3 30 verbs')
+        print('4 50 verbs')
+        print('5 100 verbs')
+        print('0 to exit')
+
+        try:
+            option = int(input('Write your answer: '))
+        except ValueError:
+            print('Please enter a valid option')
+            continue
+            
+
+        if option == 0:
+            print('* ' * 27)
+            break
+            
+
+
 verbs = open_json_file('verbs.json')
 
-print('Press enter to leave or write the verb you want')
-
 while True:
-    val_2_find = input('write the verb you want to find: ')
-
-    if val_2_find == '':
-        break
-
-    result = finder(val_2_find)
-
-    if result == None:
-        print(f'Verb {val_2_find} is not found')
+    print('Choose an option:')
+    print('1 to Find a verb')
+    print('2 to play')
+    print('0 to exit')    
+    try:
+        option = int(input("Write a number: "))
+    except ValueError:
+        print('* ' * 27)
+        print('Please enter a valid option')
         continue
 
-    print('Base:            ' + result['Base'])
-    print('Past simple:     ' + result['Past-simple'])
-    print('Past participle: ' + result['Past-Participle'])
+    if option == 1:
+        find()
+    elif option == 2:
+        game()
+    elif option == 0:
+        print('Good bye :)')
+        break
+    else:
+        continue
+
+
 
 
 
